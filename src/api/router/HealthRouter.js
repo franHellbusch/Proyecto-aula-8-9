@@ -1,8 +1,9 @@
+import { POLICIES } from "../globals/policies.js";
 import BaseRouter from "./BaseRouter.js";
 
 export class HealthRouter extends BaseRouter {
   initRoutes() {
-    this.get("/health", this.healthCheck);
+    this.get("/health", [POLICIES.NO_AUTH], this.healthCheck);
   }
 
   async healthCheck(req, res) {
