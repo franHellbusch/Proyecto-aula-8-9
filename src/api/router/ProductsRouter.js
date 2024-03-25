@@ -1,18 +1,14 @@
+import ProductsService from "../services/products.service.js";
 import BaseRouter from "./BaseRouter.js";
+const productsService = new ProductsService();
 
 export class ProductsRouter extends BaseRouter {
   initRoutes() {
-    this.get("/products", this.getProducts);
+    this.get("/", this.getProducts);
   }
 
   async getProducts(req, res) {
-    res.status(200).json({
-      success: true,
-      payload: [
-        {
-          title: "titulo1",
-        },
-      ],
-    });
+    const products = await productsService.getAll();
+    res.sendSuccessWithPayload(200, products);
   }
 }
